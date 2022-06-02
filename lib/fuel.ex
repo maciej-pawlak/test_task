@@ -3,8 +3,6 @@ defmodule Fuel do
   Module responsible for all calculations with rocket fuel.
   """
 
-  alias ParamsValidator
-
   @doc """
   Calculates total amount of fuel (in liters) needed by rocket to make the trip.
 
