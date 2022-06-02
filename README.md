@@ -1,21 +1,27 @@
 # Fuel
 
-**TODO: Add description**
+Fuel is a toolkit for calculating fuel required to make a rocket flight.
 
-## Installation
+## How to use?
+Run `mix deps.get` in your shell to fetch all required dependencies and start program with `iex -S mix` command. 
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `fuel_calculator` to your list of dependencies in `mix.exs`:
+Next, you have to plan your trip. The program needs two things to calculate the correct amount of fuel:
+* a list of directives and targeted planets' (or moons) gravities expressed in m/s<sup>2</sup>.
+* the weight of the rocket (without any fuel) expressed in kg.
+
+Example list of directives for a mission to mars (launch from Earth, land on Mars, launch from Mars and land on Earth):
 
 ```elixir
-def deps do
-  [
-    {:fuel_calculator, "~> 0.1.0"}
-  ]
-end
+[{:launch, 9.807}, {:land, 3.711}, {:launch, 3.711}, {:land, 9.807}]
 ```
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at <https://hexdocs.pm/fuel_calculator>.
+Let's say that the weight of rocket is 14606 kg. Now you are able to calculate required fuel amount for planned trip.
 
+```elixir
+iex(1)> directives = [{:launch, 9.807}, {:land, 3.711}, {:launch, 3.711}, {:land, 9.807}]
+[launch: 9.807, land: 3.711, launch: 3.711, land: 9.807]
+iex(2)> rocket_weight = 14606
+14606
+iex(3)> Fuel.calculate(rocket_weight, directives)
+33388
+```
